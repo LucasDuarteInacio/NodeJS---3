@@ -134,7 +134,7 @@ apiRouter.get(endpoint + 'produtos/:id', checkToken, (req, res) => {
         })
 })
 
-apiRouter.post(endpoint + 'produtos', isAdmin, (req, res) => {
+apiRouter.post(endpoint + 'produtos',checkToken, isAdmin, (req, res) => {
     knex('produto').insert(
         {
             descricao: req.body.descricao,
@@ -150,7 +150,7 @@ apiRouter.post(endpoint + 'produtos', isAdmin, (req, res) => {
 
 })
 
-apiRouter.put(endpoint + 'produtos/:id',isAdmin, (req, res) => {
+apiRouter.put(endpoint + 'produtos/:id',checkToken,isAdmin, (req, res) => {
     const id = parseInt(req.params.id);
     const payload = req.body
 
@@ -170,7 +170,7 @@ apiRouter.put(endpoint + 'produtos/:id',isAdmin, (req, res) => {
 
 })
 
-apiRouter.delete(endpoint + 'produtos/:id',isAdmin, (req, res) => {
+apiRouter.delete(endpoint + 'produtos/:id',checkToken,isAdmin, (req, res) => {
     const id = parseInt(req.params.id);
     knex('produto')
         .where({ id: id })
